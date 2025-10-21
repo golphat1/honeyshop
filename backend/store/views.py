@@ -4,10 +4,10 @@ from .serializers import ProductSerializer, CategorySerializer
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-queryset = Product.objects.all().order_by('-created_at')
-serializer_class = ProductSerializer
+    queryset = Product.objects.all().order_by('-created_at')
+    serializer_class = ProductSerializer
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-queryset = Category.objects.all()
-serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
