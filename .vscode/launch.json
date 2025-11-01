@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "🦋 Django Backend",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/backend/manage.py",
+        "args": ["runserver", "8000"],
+        "django": true,
+        "justMyCode": true,
+        "env": {
+          "DJANGO_SETTINGS_MODULE": "ecommerce.settings",
+          "PYTHONUNBUFFERED": "1"
+        },
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "⚡ Vite React Frontend",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/frontend",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "port": 5173,
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "🚀 Full Stack: Backend + Frontend",
+        "type": "compound",
+        "configurations": ["🦋 Django Backend", "⚡ Vite React Frontend"]
+      }
+    ]
+  }
+  

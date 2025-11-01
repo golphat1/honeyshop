@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'store',
+    "store",
+    "users",
+    "blog",
 ]
 
 MIDDLEWARE = [
@@ -140,8 +142,17 @@ REST_FRAMEWORK = {
 'DEFAULT_AUTHENTICATION_CLASSES': (
 'rest_framework.authentication.SessionAuthentication',
 'rest_framework.authentication.BasicAuthentication',
+"users.authentication.JWTAuthentication",
 ),
 }
+
+MONGODB_SETTINGS = {
+    "db": "honeyshopdb",
+    "host": "mongodb://localhost:27017/honeyshopdb"
+}
+
+STRIPE_SECRET_KEY = "your_stripe_secret_key"
+FRONTEND_URL = "http://localhost:5173"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

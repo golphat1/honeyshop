@@ -1,28 +1,35 @@
-import React, {useEffect, useState} from 'react'
-import API from '../api'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import Hero from '../components/Hero'
+import ProductCard from '../components/ProductCard'
+import api from '../services/api'
 
+export default function Home() {
+  const [products, setProducts] = useState([])
 
-export default function Home(){
-const [products, setProducts] = useState([])
-useEffect(()=>{
-API.get('/products/').then(res=>setProducts(res.data)).catch(console.error)
-},[])
+  useEffect(()=> {
+    api.get('/store/products/').then(r=> setProducts(r.data)).catch(()=>{})
+  }, [])
 
+  return (
+    <>
+      <Hero />
+      <section className="container py-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold">Featured Products</h2>
+          <div className="text-sm text-gray-600">Pure, Raw & Organic</div>
+        </div>
 
-return (
-<div>
-<h1 className="text-2xl font-bold mb-4">Products</h1>
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-{products.map(p=> (
-<div key={p.id} className="bg-white p-4 rounded shadow">
-<img src={p.image ? `http://127.0.0.1:8000${p.image}` : '/placeholder.png'} alt="" className="h-40 w-full object-cover mb-2" />
-<h2 className="font-semibold">{p.name}</h2>
-<p className="text-gray-600">${p.price}</p>
-<Link className="mt-2 inline-block text-blue-600" to={`/product/${p.slug}`}>View</Link>
-</div>
-))}
-</div>
-</div>
-)
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map(p=> <ProductCard key={p.id || p._id} product={p} />)}
+        </div>
+      </section>
+
+      <section className="bg-yellow-500 text-white py-10">
+        <div className="container text-center">
+          <h3 className="text-2xl font-bold">We Export Honey Abroad</h3>
+          <p className="mt-2 max-w-xl mx-auto">Supplying premium Kenyan honey and bee products to clients in the UK, Europe, and beyond. Contact our export team for wholesale pricing.</p>
+        </div>
+      </section>
+    </>
+  )
 }

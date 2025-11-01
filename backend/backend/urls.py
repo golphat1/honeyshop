@@ -31,6 +31,9 @@ router.register(r'categories', CategoryViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path("api/store/", include("store.urls")),
+    path("api/users/", include("users.urls")),
+    path("api/blog/", include("blog.urls")),
 ]
 
 if settings.DEBUG:
